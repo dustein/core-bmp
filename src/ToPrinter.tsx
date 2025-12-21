@@ -1,13 +1,9 @@
-export function ToPrinter() {
+import type { FormData } from "./assets/formSchema";
+
+export function ToPrinter({ dados }: { dados: FormData }) {
 
     // Simulação de conteúdo (substitua pelo seu estado ou props)
-  const resumoCompleto = `Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos
-  , como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. 
-
-  Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. 
-
-  Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. 
-  Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.`; 
+  const resumoCompleto = dados.resumo; 
   
 // 1. Definição do limite físico de linhas que cabem na Folha 1
   const MAX_LINHAS = 14; 
@@ -77,13 +73,13 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">ÓRGÃO SUBORDINANTE</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula">SEPOL / SSPIO</span>
+                <span className="text-minuscula">{dados.orgaoSubordinante}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
               <span className="shrink-0 mr-1">UPJ</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula min-w-[15ch]">CORE</span>
+                <span className="text-minuscula min-w-[15ch]">{dados.upj}</span>
               </div>
             </div>
           </div>
@@ -93,20 +89,20 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">MISSÃO Nº</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula ml-10">/ 2025</span>
+                <span className="text-minuscula ml-4">{dados.missaoNumero} / 2025</span>
               </div>
             </div>
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">DATA</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula mx-1">28 / 10</span>
+                <span className="text-minuscula mx-1">{dados.data} / 10</span>
                 <span className="text-minuscula">/ 2025</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
               <span className="shrink-0 mr-1">REF</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula min-w-[15ch]">BDT 1234567</span>
+                <span className="text-minuscula min-w-[15ch]">BDT {dados.referencia}</span>
               </div>
             </div>
           </div>
@@ -116,7 +112,7 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">NOME, CARGO E MAT. DA AUTORIDADE</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula">Dr. Fabrício de Oliveira Pereira</span>
+                <span className="text-minuscula">{dados.autoridade}</span>
               </div>
             </div>
           </div>
@@ -126,7 +122,7 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">OBJETIVO INICIAL DA MISSÃO</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula">X</span>
+                <span className="text-minuscula">{dados.objetivo}</span>
               </div>
             </div>
           </div>
@@ -136,19 +132,19 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">VIATURA</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula">67-0721</span>
+                <span className="text-minuscula">{dados.viatura}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
               <span className="shrink-0 mr-1">PLACA OFICIAL</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula min-w-[15ch]">PCERJ1234</span>
+                <span className="text-minuscula min-w-[15ch]">{dados.placaOficial}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
               <span className="shrink-0 mr-1">PLACA RES.</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula min-w-[15ch]">ABC1234</span>
+                <span className="text-minuscula min-w-[15ch]">{dados.placaReservada}</span>
               </div>
             </div>
           </div>
@@ -158,19 +154,19 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">KM SAÍDA</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula">12345</span>
+                <span className="text-minuscula">{dados.kmSaida}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
               <span className="shrink-0 mr-1">KM CHEGADA</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula min-w-[14ch]">12350</span>
+                <span className="text-minuscula min-w-[14ch]">{dados.kmChegada}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
               <span className="shrink-0 mr-1">PREFIXO CÓD.</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula min-w-[15ch]">Zeus 021</span>
+                <span className="text-minuscula min-w-[15ch]">{dados.prefixoCod}</span>
               </div>
             </div>
           </div>
@@ -180,13 +176,13 @@ export function ToPrinter() {
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">REGIÃO DE ATUAÇÃO INICIAL</span>
               <div className="border-b border-black flex grow ml-1">
-                <span className="text-minuscula">CENTRO DO RIO</span>
+                <span className="text-minuscula">{dados.regiaoAtuacao}</span>
               </div>
             </div>
           </div>
           {/* FIM SÉTIMA LINHA */}
           {/* EQUIPE POLICIAL */}
-          <div className="flex w-full items-baseline gap-4">          
+          {/* <div className="flex w-full items-baseline gap-4">          
             <div className="flex items-baseline grow">
               <span className="shrink-0 mr-1">EQUIPE POLICIAL/CHEFE</span>
               <div className="border-b border-black flex grow ml-1">
@@ -241,7 +237,33 @@ export function ToPrinter() {
                 <span className="text-minuscula min-w-[11ch]">871.460-2</span>
               </div>
             </div>
-          </div>
+          </div> */}
+          {/* EQUIPE POLICIAL DINÂMICA */}
+        <div className="flex flex-col gap-1">
+          {dados.equipe.map((policial, index) => (
+            <div key={index} className="flex w-full items-baseline gap-4">          
+              <div className="flex items-baseline grow">
+                <span className="shrink-0 mr-1 text-[0.65rem] font-bold">
+                  {index === 0 ? "EQUIPE POLICIAL/CHEFE" : "NOME"}
+                </span>
+                <div className="border-b border-black flex grow ml-1">
+                  <span className="text-minuscula uppercase font-medium">
+                    {policial.nome || <>&nbsp;</>}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-baseline shrink-0">
+                <span className="shrink-0 mr-1 text-[0.65rem] font-bold">MAT.</span>
+                <div className="border-b border-black flex grow ml-1">
+                  <span className="text-minuscula min-w-[11ch]">
+                    {policial.mat || <>&nbsp;</>}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* FIM EQUIPE POLICIAL */}
           {/* FIM EQUIPE POLICIAL */}         
         </div>
         {/* FIM PRIMEIRO BLOCO */}
@@ -329,4 +351,3 @@ export function ToPrinter() {
 }
 
 export default ToPrinter;
-      

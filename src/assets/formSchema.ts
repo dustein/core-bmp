@@ -1,23 +1,31 @@
 import { z } from "zod";
 
-export const missaoSchema = z.object({
-  // Campos Hard-Coded (Já vêm preenchidos)
-  orgaoSubordinante: z.string().default("SEPOL"),
-  upj: z.string().default("CORE"),
-  regiaoAtuacao: z.string().default("V"),
-  autoridade: z.string().default("Dr. Fabricio Oliveira Pereira"),
-
-  // Campos que o usuário vai preencher
+export const formSchema = z.object({
+  orgaoSubordinante: z.string(),
+  upj: z.string(),
+  regiaoAtuacao: z.string(),
+  autoridade: z.string(),
+  ano: z.string(),
+  objetivo: z.string(),
+  
   missaoNumero: z.string().min(1, "Nº obrigatório"),
-  ano: z.string().default("2025"),
   data: z.string().min(1, "Informe a data"),
-  referencia: z.string().min(1, " Informe o BDT"),
-  objetivo: z.string().optional(),
+  referencia: z.string().min(1, "Informe o BDT"),
   viatura: z.string().min(1, "Informe a viatura"),
-  placaOficial: z.string().optional(),
   kmSaida: z.string().min(1, "KM obrigatório"),
-  kmChegada: z.string().optional(),
-  resumo: z.string().min(10, "Preencha as missoes desempenhadas"),
+  kmChegada: z.string().min(1, "KM chegada obrogatorio"),
+  resumo: z.string().min(1, "Preencha as missões desempenhadas"),
+  placaOficial: z.string().min(4, "Preencha a placa oficial"),
+  prefixoCod: z.string().min(4, "Preencha o Prefixo"),
+  
+  placaReservada: z.string().optional(),
+
+  equipe: z.array(
+    z.object({
+      nome: z.string().min(1, "Nome obrigatório"),
+      mat: z.string().min(1, "Matrícula obrigatória"),
+    })
+  ).length(4),
 });
 
-export type MissaoData = z.infer<typeof missaoSchema>;
+export type FormData = z.infer<typeof formSchema>;
