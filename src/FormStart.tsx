@@ -164,7 +164,28 @@
 //   );
 // }
 
-import { useForm, useFieldArray } from "react-hook-form";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useForm, useFieldArray, type FieldErrors } from "react-hook-form"; // Corrigido para type-only import
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, type FormData } from "./assets/formSchema";
 
@@ -181,7 +202,6 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
       upj: "CORE",
       regiaoAtuacao: "V",
       autoridade: "Dr. Fabrício de Oliveira Pereira",
-      ano: "2025",
       objetivo: "X",
       data: "10/10/2025",
       referencia: "",
@@ -207,13 +227,12 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
     name: "equipe",
   });
 
-  // Função disparada apenas se o Zod validar todos os campos
   const aoEnviar = (data: FormData) => {
     onPreview(data);
   };
 
-  // Função para ajudar a identificar erros no console caso o botão não funcione
-  const aoDarErro = (err: any) => {
+  // Tipagem corrigida para satisfazer o ESLint e o verbatimModuleSyntax
+  const aoDarErro = (err: FieldErrors<FormData>) => {
     console.error("Campos pendentes de preenchimento:", err);
     alert("Por favor, preencha todos os campos obrigatórios (Equipe, Missão, KM, etc).");
   };
@@ -255,10 +274,6 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
           <div>
             <label className="text-[10px] font-bold uppercase">Ref (BDT)</label>
             <input {...register("referencia")} className="w-full border p-2 rounded mt-1 text-sm" />
-          </div>
-          <div>
-            <label className="text-[10px] font-bold uppercase">Ano</label>
-            <input {...register("ano")} className="w-full border p-2 rounded mt-1 text-sm bg-gray-50" />
           </div>
         </div>
 
@@ -314,7 +329,7 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
                     {index === 0 ? "Chefe de Equipe" : `Integrante ${index + 1}`}
                   </label>
                   <input 
-                    {...register(`equipe.${index}.nome`)} 
+                    {...register(`equipe.${index}.nome` as const)} 
                     placeholder="Nome Completo"
                     className="w-full border p-2 rounded mt-1 text-xs focus:ring-1 focus:ring-blue-400" 
                   />
@@ -322,7 +337,7 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
                 <div className="w-28">
                   <label className="text-[9px] font-bold uppercase text-gray-500 italic">Matrícula</label>
                   <input 
-                    {...register(`equipe.${index}.mat`)} 
+                    {...register(`equipe.${index}.mat` as const)} 
                     placeholder="000.000"
                     className="w-full border p-2 rounded mt-1 text-xs focus:ring-1 focus:ring-blue-400" 
                   />

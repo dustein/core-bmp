@@ -5,7 +5,6 @@ export const formSchema = z.object({
   upj: z.string(),
   regiaoAtuacao: z.string(),
   autoridade: z.string(),
-  ano: z.string(),
   objetivo: z.string(),
   
   missaoNumero: z.string().min(1, "Nº obrigatório"),
