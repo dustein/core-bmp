@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import type { FormData } from "../assets/formSchema";
-// 1. Importe a imagem diretamente
-import logoPCERJ from "../../public/logo-RJ.png"; 
+
+import logoPCERJ from "../assets/logo-RJ.png"; 
 
 
 function renderizarGuia(doc: jsPDF) {
@@ -153,34 +153,33 @@ export const gerarPDFOficial = async (dados: FormData) => {
 
   yPos += 8;
 
-  // --- BLOCO 7: EQUIPE POLICIAL ---  
-  dados.equipe.forEach((p, index) => {
-    if (p && p.nome) {      
-      doc.setFontSize(8);
-      doc.setTextColor(60, 60, 60);
-      const rotulo = index === 0 ? "EQUIPE POLICIAL/CHEFE" : "NOME";
-      const inicioLinhaNome = index === 0 ? 51 : 25;
-      doc.text(rotulo, margemEsq, yPos);
-      doc.line(inicioLinhaNome, yPos, 140, yPos);
+  // --- BLOCO 7: EQUIPE POLICIAL ---
+  for (let i = 0; i < 4; i++) {
+    const p = dados.equipe[i]; // Tenta pegar o integrante na posição i
     
-    // 4. Desenha o campo MAT (este permanece fixo no final da linha)
-      doc.text("MAT:", 143, yPos);
-      doc.line(150, yPos, 191, yPos);
+    doc.setFontSize(7);
+    doc.setTextColor(60, 60, 60);
+    const rotulo = i === 0 ? "EQUIPE POLICIAL/CHEFE:" : "NOME:";
+    const inicioLinhaNome = i === 0 ? 47 : 25;
 
-      // 5. Preenche os dados (ajustando o X para o texto começar logo após o início da linha)
+    // 1. Desenha os rótulos fixos
+    doc.text(rotulo, margemEsq, yPos);
+    doc.line(inicioLinhaNome, yPos, 145, yPos);
+    doc.text("MAT:", 150, yPos);
+    doc.line(160, yPos, 195, yPos);
+
+    // 2. Preenche os dados APENAS se o integrante existir
+    if (p && p.nome) {
       doc.setFontSize(10);
       doc.setTextColor(0, 0, 0);
-      doc.text((p.nome || ""), inicioLinhaNome + 2, yPos - 1);
-      doc.text(p.mat || "", 151, yPos - 1);
+      doc.text((p.nome || "").toUpperCase(), inicioLinhaNome + 2, yPos - 1);
+      doc.text(p.mat || "", 162, yPos - 1);
+    }
+
+    // 3. Incrementa o Y para a próxima linha (mesmo que esteja vazia)
       yPos += 8;
     }
-  });
-
-  // --- BLOCO 8: TABELA DE REGIÕES ---
-  yPos += 2;
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8);
-  
+    
 // --- BLOCO 8: TABELA DE REGIÕES ---
   yPos += 2;
   doc.setFont("helvetica", "bold");
@@ -190,8 +189,8 @@ export const gerarPDFOficial = async (dados: FormData) => {
   yPos += 4;
 
   const colunasX = [15, 35, 75, 100, 125, 195];
-  const alturaCabecalho = 10; // Maior altura para os títulos
-  const alturaLinhaBranco = 6; // Altura menor para as linhas de preenchimento
+  const alturaCabecalho = 11; // Maior altura para os títulos
+  const alturaLinhaBranco = 7; // Altura menor para as linhas de preenchimento
   const totalLinhasBranco = 4;
   const alturaTotalTabela = alturaCabecalho + (totalLinhasBranco * alturaLinhaBranco);
 
@@ -241,7 +240,7 @@ export const gerarPDFOficial = async (dados: FormData) => {
   doc.setFontSize(10);
   doc.setTextColor(60, 60, 60);
   doc.text("RESUMO DA MISSÃO", 105, yPos, { align: "center" });
-  doc.line(105 - (35 / 2), yPos+1, 105 + (35 / 2), yPos+1);
+  doc.line(105 - (37 / 2), yPos+1, 105 + (37 / 2), yPos+1);
   yPos += 5;
   
   doc.setFont("helvetica", "normal");
@@ -263,6 +262,8 @@ export const gerarPDFOficial = async (dados: FormData) => {
 
   // --- RODAPÉ FIXO ---
   doc.setFont("helvetica", "normal");
+  doc.setFontSize(7);
+  doc.setTextColor(60, 60, 60);
   const footerY = 285;
   doc.line(115, 265, 195, 265);
   doc.text("(LOCAL E DATA)", 155, 269, { align: "center" });
