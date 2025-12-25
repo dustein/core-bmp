@@ -9,6 +9,7 @@ export const formSchema = z.object({
   placaOficial: z.string().optional(),
   placaReservada: z.string().optional(),
   prefixoCod: z.string().optional(),
+
   
   missaoNumero: z.string().min(1, "Nº BMP Obrigatório"),
   data: z.string().min(1, "Informe a data"),

@@ -15,3 +15,39 @@
   /* Caso queira definir também a altura da linha (line-height) para essa fonte */
   --text-maiuscula--line-height: 1;
 }
+
+@media print {
+  /* Configurações da página para remover margens automáticas do navegador */
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    /* Propriedade padrão para compatibilidade (Firefox/Safari modernos) */
+    print-color-adjust: exact;
+    /* Prefixo para navegadores baseados em Chromium (Chrome/Edge) */
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Esconde elementos de interface que não devem sair no papel */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Remove o preenchimento que causa o deslocamento para baixo */
+  main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Garante que o container de preview ocupe a página inteira */
+  .printer-container {
+    width: 100%;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}

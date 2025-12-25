@@ -89,7 +89,7 @@ export const gerarPDFOficial = async (dados: FormData) => {
   // doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor(0, 0, 0);
-  doc.text(`${dados.missaoNumero || ""} / ${"2025"}`, 33, yPos - 1);
+  doc.text(`${dados.missaoNumero || ""}`, 33, yPos - 1);
   doc.text(dados.data || "", 96, yPos - 1);
   doc.text(`BDT ${dados.referencia || ""}`, 154, yPos - 1);
 
@@ -166,14 +166,14 @@ export const gerarPDFOficial = async (dados: FormData) => {
     doc.text(rotulo, margemEsq, yPos);
     doc.line(inicioLinhaNome, yPos, 145, yPos);
     doc.text("MAT:", 150, yPos);
-    doc.line(160, yPos, 195, yPos);
+    doc.line(157, yPos, 195, yPos);
 
     // 2. Preenche os dados APENAS se o integrante existir
     if (p && p.nome) {
       doc.setFontSize(10);
       doc.setTextColor(0, 0, 0);
       doc.text((p.nome || "").toUpperCase(), inicioLinhaNome + 2, yPos - 1);
-      doc.text(p.mat || "", 162, yPos - 1);
+      doc.text(p.mat || "", 159, yPos - 1);
     }
 
     // 3. Incrementa o Y para a próxima linha (mesmo que esteja vazia)

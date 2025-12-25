@@ -2,7 +2,22 @@ import { useForm, useFieldArray, type FieldErrors } from "react-hook-form"; // C
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, type FormData } from "./assets/formSchema";
 
-export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }) {
+// Interface atualizada para aceitar os dados vindos do App.tsx
+interface FormStartProps {
+  onPreview: (data: FormData) => void;
+  dadosIniciais: FormData | null;
+}
+
+export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
+  
+  const dataAtual = () => {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0'); // Janeiro é 0
+    const ano = hoje.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  };
+
   const { 
     register, 
     handleSubmit, 
@@ -10,13 +25,14 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
     formState: { errors } 
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    // Agora o formulário prioriza os dados salvos em dadosIniciais
+    defaultValues: dadosIniciais || {
       orgaoSubordinante: "SEPOL/SSPIO",
       upj: "CORE",
       regiaoAtuacao: "V",
       autoridade: "Dr. Fabrício de Oliveira Pereira",
       objetivo: "X",
-      data: "10/10/2025",
+      data: dataAtual(),
       referencia: "",
       missaoNumero: "",
       viatura: "",
@@ -78,7 +94,7 @@ export function FormStart({ onPreview }: { onPreview: (data: FormData) => void }
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-4 rounded border shadow-sm">
           <div>
             <label className="text-sm font-bold uppercase">Nº Missão</label>
-            <input {...register("missaoNumero")} className="w-full border p-2 rounded mt-1 text-sm" placeholder="Ex: 042" />
+            <input {...register("missaoNumero")} className="w-full border p-2 rounded mt-1 text-sm" />
             {errors.missaoNumero && (
               <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
             )}
