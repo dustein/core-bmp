@@ -24,25 +24,39 @@ export function ToPrinter({ dados }: { dados: FormData }) {
     <>
       <div 
         id="area-impressao" 
+        className="w-[210mm] h-[297mm] text-maiuscula font-sans pt-8 px-15 flex flex-col overflow-hidden shadow-sm print:shadow-none print:m-0"
         style={{ backgroundColor: '#ffffff', color: '#000000' }}
-        className="w-[210mm] h-[297mm] mx-auto text-maiuscula font-sans pt-8 px-15 flex flex-col overflow-hidden shadow-sm print:shadow-none"
       >
         <style dangerouslySetInnerHTML={{ __html: `
           @media print {
-            @page { size: A4; margin: 0; }
-            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            @page { 
+              size: A4; 
+              margin: 0; 
+            }
+            body { 
+              margin: 0 !important;
+              padding: 0 !important;
+              -webkit-print-color-adjust: exact; 
+              print-color-adjust: exact; 
+            }
+            html {
+              margin: 0 !important;
+            }
+            #area-impressao {
+              margin: 0 !important;
+              border: none !important;
+              break-before: avoid; /* Impede que o navegador crie uma página em branco antes */
+            }
             .no-print { display: none; }
-            html, body { width: 210mm; height: 297mm; }
           }
-        `}} 
-        />
+        `}} />
 
         {/* CABEÇALHO */}
         <div className="text-center mb-6">
           <div className="w-10 h-10 mx-auto mb-5">
             <img src="/logo-RJ.png" alt="logotipo governo do estado do rio de janeiro" />
           </div>
-          <div className="text-maiuscula font-bold leading-2.5 tracking-tighter">
+          <div className="text-maiuscula text-gray-700 font-bold leading-2.5 tracking-tighter">
             <h3>SECRETARIA DE ESTADO DE SEGURANÇA</h3>
             <h3>POLÍCIA CIVIL DO ESTADO DO RIO DE JANEIRO</h3>
             <h3>BOLETIM DE MISSÃO POLICIAL - BMP</h3>
@@ -50,40 +64,42 @@ export function ToPrinter({ dados }: { dados: FormData }) {
         </div>
 
         {/* PRIMEIRO BLOCO */}
-        <div className="flex flex-col gap-2.5 shrink-0">
-          <div className="flex w-full items-baseline gap-4">          
+        <div className="flex flex-col gap-2.5 shrink-0 pt-3">
+          <div className="flex w-full items-baseline gap-4">
+            
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">ÓRGÃO SUBORDINANTE</span>
-              {/* AJUSTE: padding-bottom para o texto não bater na linha */}
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">ÓRGÃO SUBORDINANTE</span>  
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula">{dados.orgaoSubordinante}</span>
               </div>
             </div>
+
             <div className="flex items-baseline shrink-0">
-              <span className="shrink-0 mr-1 text-maiuscula">UPJ</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">UPJ</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula min-w-[15ch]">{dados.upj}</span>
               </div>
             </div>
+
           </div>
 
           <div className="flex w-full items-baseline gap-4">          
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">MISSÃO Nº</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">MISSÃO Nº</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula ml-4">{dados.missaoNumero}</span>
               </div>
             </div>
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">DATA</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">DATA</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula mx-1">{dados.data} / 10</span>
                 <span className="text-minuscula">/ 2025</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
-              <span className="shrink-0 mr-1 text-maiuscula">REF</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">REF</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula min-w-[15ch]">BDT {dados.referencia}</span>
               </div>
             </div>
@@ -91,8 +107,8 @@ export function ToPrinter({ dados }: { dados: FormData }) {
 
           <div className="flex w-full items-baseline gap-4">
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">NOME, CARGO E MAT. DA AUTORIDADE</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">NOME, CARGO E MAT. DA AUTORIDADE</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula">{dados.autoridade}</span>
               </div>
             </div>
@@ -100,8 +116,8 @@ export function ToPrinter({ dados }: { dados: FormData }) {
 
           <div className="flex w-full items-baseline gap-4">
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">OBJETIVO INICIAL DA MISSÃO</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">OBJETIVO INICIAL DA MISSÃO</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula">{dados.objetivo}</span>
               </div>
             </div>
@@ -109,71 +125,71 @@ export function ToPrinter({ dados }: { dados: FormData }) {
 
           <div className="flex w-full items-baseline gap-4">          
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">VIATURA</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">VIATURA</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula">{dados.viatura}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
-              <span className="shrink-0 mr-1 text-maiuscula">PLACA OFICIAL</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">PLACA OFICIAL</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula min-w-[15ch]">{dados.placaOficial}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
-              <span className="shrink-0 mr-1 text-maiuscula">PLACA RES.</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">PLACA RES.</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula min-w-[15ch]">{dados.placaReservada}</span>
               </div>
             </div>
           </div>
 
-          <div className="flex w-full items-baseline gap-4">          
+          <div className="flex w-full items-baseline gap-4">
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">KM SAÍDA</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">KM SAÍDA</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula">{dados.kmSaida}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
-              <span className="shrink-0 mr-1 text-maiuscula">KM CHEGADA</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">KM CHEGADA</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula min-w-[14ch]">{dados.kmChegada}</span>
               </div>
             </div>
             <div className="flex items-baseline shrink-0">
-              <span className="shrink-0 mr-1 text-maiuscula">PREFIXO CÓD.</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">PREFIXO CÓD.</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula min-w-[15ch]">{dados.prefixoCod}</span>
               </div>
             </div>
           </div>
 
-          <div className="flex w-full items-baseline gap-4 mt-2">
+          <div className="flex w-full items-baseline gap-4">
             <div className="flex items-baseline grow">
-              <span className="shrink-0 mr-1 text-maiuscula">REGIÃO DE ATUAÇÃO INICIAL</span>
-              <div style={{ borderBottom: '1px solid #000000', paddingBottom: '1px' }} className="flex grow ml-1">
+              <span className="shrink-0 mr-1 text-maiuscula text-gray-800">REGIÃO DE ATUAÇÃO INICIAL</span>
+              <div className="flex grow ml-1 border-b border-black pb-0.5">
                 <span className="text-minuscula">{dados.regiaoAtuacao}</span>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col -mt-0.5">
             {dados.equipe.map((policial, index) => (
-              <div key={index} className="flex w-full items-baseline gap-4">          
-                <div className="flex items-baseline grow">
-                  <span className="shrink-0 mr-1 text-maiuscula">
+              <div key={index} className="flex w-full items-baseline gap-4">
+                <div className="flex items-baseline grow pb-1.5">
+                  <span className="shrink-0 mr-1 text-maiuscula text-gray-800">
                     {index === 0 ? "EQUIPE POLICIAL/CHEFE" : "NOME"}
                   </span>
-                  <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+                  <div className="flex grow ml-1 border-b border-black pb-0.5">
                     <span className="text-minuscula">
                       {policial.nome || <>&nbsp;</>}
                     </span>
                   </div>
                 </div>
                 <div className="flex items-baseline shrink-0">
-                  <span className="shrink-0 mr-1 text-[0.65rem]">MAT.</span>
-                  <div style={{ borderBottom: '1px solid #000000', paddingBottom: '2px' }} className="flex grow ml-1">
+                  <span className="shrink-0 mr-1 text-maiuscula text-gray-800">MAT.</span>
+                  <div className="flex grow ml-1 border-b border-black pb-0.5">
                     <span className="text-minuscula min-w-[11ch]">
                       {policial.mat || <>&nbsp;</>}
                     </span>
@@ -215,25 +231,25 @@ export function ToPrinter({ dados }: { dados: FormData }) {
           <div className="text-center font-bold text-[0.65rem] underline mb-2 shrink-0">
             RESUMO DA MISSÃO
           </div>
-          <div style={{ border: '1px dashed #cccccc' }} className="text-minuscula leading-relaxed flex-1 overflow-hidden p-2 whitespace-pre-wrap">
+          <div className="border border-dashed border-gray-100 text-minuscula leading-relaxed flex-1 overflow-hidden p-2 whitespace-pre-wrap">
             {textoFolha1}
-            {textoFolha2 && <p style={{ color: '#000000' }} className="font-bold mt-1 text-[0.5rem]">(Continua...)</p>}
+            {textoFolha2 && <p className="font-bold mt-1 text-[0.5rem]">(Continua...)</p>}
           </div>
         </div>
 
         {/* ASSINATURAS */}
-        <div className="mt-auto pb-10 flex flex-col gap-12 shrink-0">
+        <div className="mt-auto pb-10 flex flex-col gap-10 shrink-0">
           <div className="flex justify-end">
-            <div className="w-64 text-center">
+            <div className="w-56 text-center">
               <div className="text-minuscula mb-1">Rio de Janeiro, {dados.data}</div>
-              <div style={{ borderTop: '1px solid #000000' }} className="pt-1 uppercase text-maiuscula">
+              <div className=" border-t pt-1 uppercase text-maiuscula">
                 (LOCAL E DATA)
               </div>
             </div>
           </div>
           <div className="flex justify-between">
-            <div style={{ borderTop: '1px solid #000000' }} className="w-56 pt-1 uppercase text-center text-maiuscula">(VISTO/AUTORIDADE POLICIAL)</div>
-            <div style={{ borderTop: '1px solid #000000' }} className="w-56 pt-1 uppercase text-center text-maiuscula">(ASSINATURA, MAT. CHEFE DE EQUIPE)</div>
+            <div className="border-t w-56 pt-1 uppercase text-center text-maiuscula">(VISTO/AUTORIDADE POLICIAL)</div>
+            <div className="border-t w-56 pt-1 uppercase text-center text-maiuscula">(ASSINATURA, MAT. CHEFE DE EQUIPE)</div>
           </div>
         </div>
       </div>

@@ -4,25 +4,25 @@ import type { FormData } from "../assets/formSchema";
 import logoPCERJ from "../assets/logo-RJ.png"; 
 
 
-function renderizarGuia(doc: jsPDF) {
-    for (let i = 0; i <= 210; i += 5) {
-        doc.setDrawColor(i % 20 === 0 ? 200 : 235);
-        doc.line(i, 0, i, 297);
-        if (i % 20 === 0) {
-            doc.setFontSize(6);
-            doc.text(i.toString(), i + 1, 5);
-        }
-    }
-    for (let j = 0; j <= 297; j += 5) {
-        doc.setDrawColor(j % 20 === 0 ? 200 : 235);
-        doc.line(0, j, 210, j);
-        if (j % 20 === 0) {
-            doc.setFontSize(6);
-            doc.text(j.toString(), 1, j - 1);
-        }
-    }
-    doc.setDrawColor(0); // Volta para preto
-}
+// function renderizarGuia(doc: jsPDF) {
+//     for (let i = 0; i <= 210; i += 5) {
+//         doc.setDrawColor(i % 20 === 0 ? 200 : 235);
+//         doc.line(i, 0, i, 297);
+//         if (i % 20 === 0) {
+//             doc.setFontSize(6);
+//             doc.text(i.toString(), i + 1, 5);
+//         }
+//     }
+//     for (let j = 0; j <= 297; j += 5) {
+//         doc.setDrawColor(j % 20 === 0 ? 200 : 235);
+//         doc.line(0, j, 210, j);
+//         if (j % 20 === 0) {
+//             doc.setFontSize(6);
+//             doc.text(j.toString(), 1, j - 1);
+//         }
+//     }
+//     doc.setDrawColor(0); // Volta para preto
+// }
 
 
 export const gerarPDFOficial = async (dados: FormData) => {
@@ -33,7 +33,7 @@ export const gerarPDFOficial = async (dados: FormData) => {
     compress: true,
   });
 
-  renderizarGuia(doc);
+  // renderizarGuia(doc);
 
   const margemEsq = 15;
   const larguraUtil = 180;

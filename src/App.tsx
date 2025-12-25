@@ -1,26 +1,36 @@
 // import { useState } from 'react';
 // import { FormStart } from './FormStart';
 // import { ToPrinter } from './ToPrinter';
-// import { ModalEnviarEmail } from './components/ModalSharePDF'; // Certifique-se que o nome do arquivo bate
+// import { ModalEnviarEmail } from './components/ModalSharePDF';
 // import type { FormData } from './assets/formSchema';
 
 // export default function App() {
-  
+//   // 1. Mantemos os dados aqui como a "memória central"
 //   const [dadosMissao, setDadosMissao] = useState<FormData | null>(null);
+  
+//   // 2. Novo estado para controlar apenas QUAL tela o usuário vê
+//   const [etapa, setEtapa] = useState<'formulario' | 'preview'>('formulario');
+  
 //   const [modalAberto, setModalAberto] = useState(false);
 
-  
+//   // Função chamada quando o usuário clica em "Visualizar" no formulário
+//   const lidarComPreview = (dados: FormData) => {
+//     setDadosMissao(dados); // Salva os dados no "corredor" (App)
+//     setEtapa('preview');   // Muda para a tela de preview
+//   };
 
 //   return (
-//     <main className="min-h-screen bg-gray-100 py-10">
-//       {!dadosMissao ? (
-//         <FormStart onPreview={(dados) => setDadosMissao(dados)} />
+//     <main className="flex justify-center min-h-screen">
+//       {etapa === 'formulario' ? (
+//         <FormStart 
+//           onPreview={lidarComPreview} 
+//           dadosIniciais={dadosMissao} // Passa os dados salvos de volta
+//         />
 //       ) : (
-//         <div className="flex flex-col items-center gap-4">
-//           {/* BARRA DE FERRAMENTAS */}
-//           <div className="no-print flex gap-4 bg-white p-4 rounded-lg shadow-md mb-4">
-//             <button 
-//               onClick={() => setDadosMissao(null)}
+//         <div className="flex flex-col justify-center max-w-4xl mx-auto p-1 sm:p-4 bg-gray-100 shadow-md font-sans w-full">
+//           <div className="no-print flex justify-evenly gap-1 text-[0.65rem] md:text-sm md:gap-4 py-4 md:rounded-lg shadow-md md:mb-4">
+//             <button              
+//               onClick={() => setEtapa('formulario')}
 //               className="bg-gray-600 text-white px-4 py-2 rounded font-bold"
 //             >
 //               ← Voltar
@@ -33,20 +43,17 @@
 //               🖨️ Imprimir
 //             </button>
 
-//             {/* ESTE BOTÃO CHAMA O NOVO MODAL COM JSPDF */}
 //             <button 
 //               onClick={() => setModalAberto(true)}
 //               className="bg-green-600 text-white px-4 py-2 rounded font-bold shadow-lg"
 //             >
-//               🔗 Gerar e Enviar PDF
+//               🔗 Gerar PDF
 //             </button>
 //           </div>
           
-//           {/* Preview visual na tela */}
-//           <ToPrinter dados={dadosMissao} />
+//           {dadosMissao && <ToPrinter dados={dadosMissao} />}
 
-//           {/* O Modal que agora usa o pdfService.ts interno */}
-//           {modalAberto && (
+//           {modalAberto && dadosMissao && (
 //             <ModalEnviarEmail 
 //               dados={dadosMissao} 
 //               onClose={() => setModalAberto(false)} 
@@ -65,33 +72,33 @@ import { ModalEnviarEmail } from './components/ModalSharePDF';
 import type { FormData } from './assets/formSchema';
 
 export default function App() {
-  // 1. Mantemos os dados aqui como a "memória central"
   const [dadosMissao, setDadosMissao] = useState<FormData | null>(null);
-  
-  // 2. Novo estado para controlar apenas QUAL tela o usuário vê
   const [etapa, setEtapa] = useState<'formulario' | 'preview'>('formulario');
-  
   const [modalAberto, setModalAberto] = useState(false);
 
-  // Função chamada quando o usuário clica em "Visualizar" no formulário
   const lidarComPreview = (dados: FormData) => {
-    setDadosMissao(dados); // Salva os dados no "corredor" (App)
-    setEtapa('preview');   // Muda para a tela de preview
+    setDadosMissao(dados);
+    setEtapa('preview');
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 py-10">
-      {/* 3. A lógica de exibição agora depende do estado 'etapa' */}
+    /* Adicionado print:block e print:p-0 para evitar que o flexbox e o padding do main afetem a impressão */
+    <main className="flex justify-center min-h-screen print:block print:p-0 print:m-0">
       {etapa === 'formulario' ? (
         <FormStart 
           onPreview={lidarComPreview} 
-          dadosIniciais={dadosMissao} // Passa os dados salvos de volta
+          dadosIniciais={dadosMissao} 
         />
       ) : (
-        <div className="flex flex-col items-center gap-4">
-          <div className="no-print flex gap-4 bg-white p-4 rounded-lg shadow-md mb-4">
-            <button 
-              // 4. Ao voltar, mudamos a etapa, mas os 'dadosMissao' continuam salvos
+        /* Modificações nesta Div:
+           1. print:p-0 e print:m-0: Remove espaçamentos que empurram o conteúdo para a segunda página.
+           2. print:shadow-none e print:bg-transparent: Remove estilos visuais desnecessários.
+           3. print:max-w-none: Garante que a div ocupe a largura total da folha A4 definida no ToPrinter.
+        */
+        <div className="flex flex-col justify-center max-w-4xl mx-auto p-1 sm:p-4 bg-gray-100 shadow-md font-sans w-full print:p-0 print:m-0 print:shadow-none print:bg-transparent print:max-w-none print:block">
+          
+          <div className="no-print flex justify-evenly gap-1 text-[0.65rem] md:text-sm md:gap-4 py-4 md:rounded-lg shadow-md md:mb-4">
+            <button               
               onClick={() => setEtapa('formulario')}
               className="bg-gray-600 text-white px-4 py-2 rounded font-bold"
             >
@@ -109,11 +116,10 @@ export default function App() {
               onClick={() => setModalAberto(true)}
               className="bg-green-600 text-white px-4 py-2 rounded font-bold shadow-lg"
             >
-              🔗 Gerar e Enviar PDF
+              🔗 Gerar PDF
             </button>
           </div>
           
-          {/* Se chegamos aqui, 'dadosMissao' certamente não é nulo */}
           {dadosMissao && <ToPrinter dados={dadosMissao} />}
 
           {modalAberto && dadosMissao && (

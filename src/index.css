@@ -9,11 +9,8 @@
 
 @theme {
   /* No Tailwind v4, a variável deve começar com --text- para gerar a classe text-* */
-  --text-maiuscula: 0.5rem;
-  --text-minuscula: 0.7rem;
-  
-  /* Caso queira definir também a altura da linha (line-height) para essa fonte */
-  --text-maiuscula--line-height: 1;
+  --text-maiuscula: 0.60rem;
+  --text-minuscula: 0.75rem;
 }
 
 @media print {
@@ -50,4 +47,8 @@
     max-height: 100vh;
     overflow: hidden;
   }
+}
+
+body.modal-open {
+  overflow: hidden;
 }

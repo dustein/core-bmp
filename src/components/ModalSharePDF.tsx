@@ -10,6 +10,7 @@ interface Props {
 export function ModalEnviarEmail({ dados, onClose }: Props) {
   const [loading, setLoading] = useState(false);
 
+  // A função deve estar declarada EXATAMENTE aqui, dentro do componente
   const handleCompartilhar = async () => {
     setLoading(true);
     try {
@@ -28,8 +29,8 @@ export function ModalEnviarEmail({ dados, onClose }: Props) {
         doc.save(`BMP_${dados.missaoNumero}.pdf`);
       }
       onClose();
-    } catch { 
-      // Removida a variável para evitar o aviso do ESLint
+    } catch (error) { 
+      console.error(error);
       alert("Erro ao processar o PDF oficial.");
     } finally {
       setLoading(false);
@@ -37,25 +38,43 @@ export function ModalEnviarEmail({ dados, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-999 p-4">
-      <div className="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-2xl border-t-4 border-blue-900">
-        <h2 className="text-xl font-bold mb-4 uppercase">Gerar BMP Oficial</h2>
-        <p className="text-sm text-gray-600 mb-6">
-          O PDF será gerado com coordenadas exatas via jsPDF para garantir o alinhamento das linhas.
-        </p>
-        <button 
-          onClick={handleCompartilhar}
-          disabled={loading}
-          className="w-full bg-blue-900 text-white py-3 rounded font-bold shadow-lg disabled:bg-gray-400 active:scale-95 transition-transform uppercase tracking-wider"
-        >
-          {loading ? "PROCESSANDO..." : "COMPARTILHAR PDF"}
-        </button>
-        <button 
-          onClick={onClose} 
-          className="mt-4 text-gray-400 text-xs font-bold uppercase underline hover:text-gray-600"
-        >
-          Voltar
-        </button>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-100 p-4">
+      {/* max-w-[95%] e overflow-y-auto garantem que o modal caiba e role em celulares pequenos */}
+      <div className="bg-white rounded-2xl p-6 w-full max-w-sm border-t-8 border-blue-900 shadow-2xl flex flex-col gap-4 overflow-y-auto max-h-[90vh]">
+        
+        <div className="flex flex-col items-center text-center">
+          <div className="bg-blue-50 p-4 rounded-full mb-4">
+            <span className="text-3xl text-blue-900">📄</span>
+          </div>
+          <h2 className="text-xl font-black text-gray-800 tracking-tight">
+            Finalização BMP Oficial
+          </h2>
+          <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+            O PDF será gerado com nome de arquivo <strong>{`BMP_${dados.missaoNumero}.pdf`}</strong>, e você poderá enviar através de seu e-mail ou WhatsApp para o computador com impressora conectada.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2 mt-4">
+          <button 
+            onClick={handleCompartilhar}
+            disabled={loading}
+            className="w-full bg-blue-900 hover:bg-blue-800 text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg active:scale-95 transition-all disabled:bg-gray-400"
+          >
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                PROCESSANDO...
+              </span>
+            ) : "Gerar PDF"}
+          </button>
+          
+          <button 
+            onClick={onClose}
+            className="w-full py-3 text-gray-400 text-xs font-bold uppercase hover:text-red-600 transition-colors"
+          >
+            ← Voltar
+          </button>
+        </div>
       </div>
     </div>
   );
