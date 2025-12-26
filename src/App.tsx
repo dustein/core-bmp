@@ -83,7 +83,7 @@ export default function App() {
 
   return (
     /* Adicionado print:block e print:p-0 para evitar que o flexbox e o padding do main afetem a impressão */
-    <main className="flex justify-center min-h-screen print:block print:p-0 print:m-0">
+    <main className="flex justify-center min-h-screen print:block print:p-0 print:m-0 bg-black">
       {etapa === 'formulario' ? (
         <FormStart 
           onPreview={lidarComPreview} 
