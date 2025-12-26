@@ -87,15 +87,15 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
           <div className="w-full">
             <Label htmlFor="orgaoSubordinante">Órgão Subordinante</Label>
-            <input {...register("orgaoSubordinante")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
+            <input {...register("orgaoSubordinante")} className="w-full border p-2 rounded mt-1 font-bold text-[0.65rem] md:text-sm bg-blue-50/20" />
           </div>
           <div className="w-full">
             <Label htmlFor="upj">UPJ</Label>
-            <input {...register("upj")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
+            <input {...register("upj")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
           </div>
           <div className="w-full">
             <Label htmlFor="autoridade">Nome, Cargo e Mat. da Autoridade</Label>
-            <input {...register("autoridade")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
+            <input {...register("autoridade")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
           </div>
         </div>
 
@@ -103,21 +103,21 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
           <div className="w-full">
             <Label htmlFor="missaoNumero">Nº Missão</Label>
-            <input {...register("missaoNumero")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
+            <input {...register("missaoNumero")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
             {errors.missaoNumero && (
               <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
             )}
           </div>
           <div className="w-full">
             <Label htmlFor="data">Data</Label>
-            <input {...register("data")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
+            <input {...register("data")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
             {errors.data && (
                 <p className="text-red-600 text-sm font-bold italic">{errors.data.message}</p>
             )}
           </div>
           <div className="w-full">
             <Label htmlFor="referencia">Ref. (BDT)</Label>
-            <input {...register("referencia")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
+            <input {...register("referencia")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
             {errors.referencia && (
                 <p className="text-red-600 text-sm font-bold italic">{errors.referencia.message}</p>
             )}            
@@ -131,7 +131,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
             <input 
               {...register("viatura")} 
               list="lista-viaturas" // Conecta ao datalist abaixo
-              className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm"
+              className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm"
               inputMode="numeric"
               onChange={(e) => {
                 const valor = e.target.value;
@@ -150,19 +150,19 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
           </div>
           <div className="w-full">
             <Label htmlFor="placaOficial">Placa Oficial</Label>
-            <input {...register("placaOficial")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
+            <input {...register("placaOficial")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
           </div>
           <div className="w-full">
             <Label htmlFor="placaReservada" className="text-sm font-bold uppercase">Placa Reservada</Label>
-            <input {...register("placaReservada")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
+            <input {...register("placaReservada")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
           </div>
           <div className="w-full">
             <Label htmlFor="prefixoCod">Prefixo Cód.</Label>
-            <input {...register("prefixoCod")} className="w-full border p-2 rounded mt-1 text-sm font-bold text-blue-900" />
+            <input {...register("prefixoCod")} className="w-full border p-2 font-bold rounded mt-1 text-sm font-bold text-blue-900" />
           </div>
           <div className="w-full">
             <Label htmlFor="kmSaida">KM Saída</Label>
-            <input {...register("kmSaida")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+            <input {...register("kmSaida")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
   pattern="[0-9]*"/>
             {errors.kmSaida && (
                 <p className="text-red-600 text-sm font-bold italic">{errors.kmSaida.message}</p>
@@ -170,7 +170,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
           </div>
           <div className="w-full">
             <Label htmlFor="kmChegada">KM Chegada</Label>
-            <input {...register("kmChegada")} className="w-full border p-2 rounded mt-1 text-sm" inputMode="numeric" 
+            <input {...register("kmChegada")} className="w-full border p-2 font-bold rounded mt-1 text-sm" inputMode="numeric" 
   pattern="[0-9]*"/>
             {errors.kmChegada && (
                 <p className="text-red-600 text-sm font-bold italic">{errors.kmChegada.message}</p>
@@ -183,11 +183,11 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
           
           <div>
             <Label htmlFor="regiaoAtuacao">Região de Atuação Inicial</Label>
-            <input {...register("regiaoAtuacao")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
+            <input {...register("regiaoAtuacao")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
           </div>
           <div>
             <Label htmlFor="objetivo">Objetivo Inicial</Label>
-            <input {...register("objetivo")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
+            <input {...register("objetivo")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
           </div>
         </div>
 
@@ -201,7 +201,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
                 className="flex flex-col md:flex-row gap-2 items-start p-2 rounded relative border-b border-3 md:border-none border-gray-200 m-1"
               >
                 <div className="w-full md:flex-1">
-                  <Label className="text-xs md:text-sm font-bold uppercase">
+                  <Label className="text-xs md:text-sm uppercase">
                     {index === 0 ? "Chefe de Equipe" : `Integrante ${index + 1}`}
                   </Label>
 
@@ -209,7 +209,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
                     {...register(`equipe.${index}.nome` as const)} 
                     list="lista-nomes" // Conecta com o datalist
                     placeholder="Nome Completo"
-                    className={`w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
+                    className={`w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
                       index === 0 && errors.equipe ? "border-red-500 focus:ring-red-400" : "focus:ring-blue-400"
                     }`} 
                     onChange={(e) => {
@@ -238,12 +238,12 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
                 </div>
                 
                 <div className="w-full md:w-32">
-                  <Label className="text-xs md:text-sm font-bold uppercase">Matrícula / ID</Label>
+                  <Label className="text-xs md:text-sm uppercase">Matrícula / ID</Label>
                   <input 
                     {...register(`equipe.${index}.mat` as const)} 
                     inputMode="numeric"
                     placeholder="000.000"
-                    className={`w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
+                    className={`w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
                       index === 0 && errors.equipe ? "border-red-500" : ""
                     }`} 
                   />
@@ -258,7 +258,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
           <Label htmlFor="resumo">Resumo das Missões Desempenhadas</Label>
           <textarea 
             {...register("resumo")} 
-            className="w-full border p-3 rounded mt-1 h-40 text-[0.65rem] md:text-sm font-mono focus:ring-2 focus:ring-blue-800 outline-none shadow-inner" 
+            className="w-full border p-3 rounded mt-1 h-40 text-[0.65rem] md:text-sm font-mono font-bold focus:ring-2 focus:ring-blue-800 outline-none shadow-inner" 
             placeholder="Enumere as missões do dia..."
           />
           {errors.resumo && (
