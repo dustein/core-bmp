@@ -9,8 +9,8 @@
 
 @theme {
   /* No Tailwind v4, a variável deve começar com --text- para gerar a classe text-* */
-  --text-maiuscula: 0.60rem;
-  --text-minuscula: 0.75rem;
+  --text-maiuscula: 0.56rem;
+  --text-minuscula: 0.71rem;
 }
 
 @media print {
@@ -39,6 +39,7 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   /* Garante que o container de preview ocupe a página inteira */
