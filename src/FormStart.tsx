@@ -116,7 +116,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
             )}
           </div>
           <div className="w-full">
-            <Label htmlFor="referencia">Ref (BDT)</Label>
+            <Label htmlFor="referencia">Ref. (BDT)</Label>
             <input {...register("referencia")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
             {errors.referencia && (
                 <p className="text-red-600 text-sm font-bold italic">{errors.referencia.message}</p>
@@ -127,7 +127,7 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
         {/* SEÇÃO 3: VIATURA E KM */}
         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
           <div className="w-full">
-            <Label htmlFor="viatura">Viatura</Label>
+            <Label htmlFor="viatura">Viatura (Nº Ordem)</Label>
             <input 
               {...register("viatura")} 
               list="lista-viaturas" // Conecta ao datalist abaixo
@@ -237,9 +237,8 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
                   )}
                 </div>
                 
-                {/* 'w-full' no celular garante que o input ocupe a largura total; 'md:w-28' fixa o tamanho no PC */}
                 <div className="w-full md:w-32">
-                  <Label className="text-xs md:text-sm font-bold uppercase">Matrícula</Label>
+                  <Label className="text-xs md:text-sm font-bold uppercase">Matrícula / ID</Label>
                   <input 
                     {...register(`equipe.${index}.mat` as const)} 
                     inputMode="numeric"
