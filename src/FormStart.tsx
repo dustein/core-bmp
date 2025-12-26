@@ -8,10 +8,11 @@ import { LISTA_VIATURAS } from "./assets/viaturas";
 interface FormStartProps {
   onPreview: (data: FormData) => void;
   dadosIniciais: FormData | null;
+  onAbrirFeedback: () => void;
 }
 
 
-export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
+export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormStartProps) {
   
   const dataAtual = () => {
     const hoje = new Date();
@@ -153,12 +154,12 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
             <input {...register("placaOficial")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
           </div>
           <div className="w-full">
-            <Label htmlFor="placaReservada" className="text-sm font-bold uppercase">Placa Reservada</Label>
+            <Label htmlFor="placaReservada" className="text-sm uppercase">Placa Reservada</Label>
             <input {...register("placaReservada")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
           </div>
           <div className="w-full">
             <Label htmlFor="prefixoCod">Prefixo Cód.</Label>
-            <input {...register("prefixoCod")} className="w-full border p-2 font-bold rounded mt-1 text-sm font-bold text-blue-900" />
+            <input {...register("prefixoCod")} className="w-full border p-2 font-bold rounded mt-1 text-sm text-blue-900" />
           </div>
           <div className="w-full">
             <Label htmlFor="kmSaida">KM Saída</Label>
@@ -272,6 +273,17 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
         >
           Visualizar BMP / Tela de Impressão
         </button>
+
+        <div className="mt-8 border-t pt-4">
+          <button 
+            type="button"
+            onClick={onAbrirFeedback} // Esta função vem das props
+            className="w-full bg-gray-100 text-gray-500 border font-bold py-4 rounded-lg hover:bg-blue-900 transition-all shadow-xl active:scale-[0.98] uppercase tracking-widest text-[0.65rem] md:text-sm"
+          >
+            💡 Sugerir uma melhoria ou relatar erro
+          </button>
+        </div>
+
       </form>
       <datalist id="lista-nomes">
         {LISTA_POLICIAIS.map((p) => (

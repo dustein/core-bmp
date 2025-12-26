@@ -132,11 +132,13 @@ import { useState } from 'react';
 import { FormStart } from './FormStart';
 import { ToPrinter } from './ToPrinter';
 import type { FormData } from './assets/formSchema';
+import { TelaFeedback } from './components/Feedback';
 
 export default function App() {
   const [dadosMissao, setDadosMissao] = useState<FormData | null>(null);
   
-  const [etapa, setEtapa] = useState<'formulario' | 'preview'>('formulario');
+ 
+  const [etapa, setEtapa] = useState<'formulario' | 'preview' | 'feedback'>('formulario');
 
   const lidarComPreview = (dados: FormData) => {
     setDadosMissao(dados);
@@ -148,22 +150,27 @@ export default function App() {
   // };
 
   return (
-  /* print:block e print:p-0 removem o flexbox na hora da impressão */
-  <main className="flex justify-center min-h-screen print:block print:p-0 print:m-0 bg-black">
-    {etapa === 'formulario' ? (
-      <FormStart 
-        onPreview={lidarComPreview} 
-        dadosIniciais={dadosMissao} 
-      />
-    ) : (
-      /* Remova as classes de centralização daqui no modo print */
-      dadosMissao && (
+  <main className="...">
+      {/* 2. Lógica para alternar entre as 3 telas */}
+      {etapa === 'formulario' && (
+            <FormStart 
+              // 2. É AQUI que você "usa" o valor da função
+              onPreview={lidarComPreview} 
+              dadosIniciais={dadosMissao} 
+              onAbrirFeedback={() => setEtapa('feedback')} 
+            />
+      )}
+
+      {etapa === 'preview' && dadosMissao && (
         <ToPrinter 
           dados={dadosMissao} 
           onClose={() => setEtapa('formulario')} 
         />
-      )
-    )}
-  </main>
+      )}
+
+      {etapa === 'feedback' && (
+        <TelaFeedback onVoltar={() => setEtapa('formulario')} />
+      )}
+    </main>
 );
 }
