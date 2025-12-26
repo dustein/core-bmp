@@ -93,23 +93,26 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
           <div className="w-full">
             <Label htmlFor="missaoNumero">Nº Missão</Label>
-            <input {...register("missaoNumero")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
+            <input {...register("missaoNumero")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+  pattern="[0-9]*"/>
             {errors.missaoNumero && (
               <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
             )}
           </div>
           <div className="w-full">
             <Label htmlFor="data">Data</Label>
-            <input {...register("data")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
-            {errors.missaoNumero && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
+            <input {...register("data")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+  pattern="[0-9]*"/>
+            {errors.data && (
+                <p className="text-red-600 text-sm font-bold italic">{errors.data.message}</p>
             )}
           </div>
           <div className="w-full">
             <Label htmlFor="referencia">Ref (BDT)</Label>
-            <input {...register("referencia")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
-            {errors.missaoNumero && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
+            <input {...register("referencia")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+  pattern="[0-9]*"/>
+            {errors.referencia && (
+                <p className="text-red-600 text-sm font-bold italic">{errors.referencia.message}</p>
             )}            
           </div>
         </div>
@@ -118,9 +121,10 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
           <div className="w-full">
             <Label htmlFor="viatura">Viatura</Label>
-            <input {...register("viatura")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
-            {errors.missaoNumero && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
+            <input {...register("viatura")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+  pattern="[0-9]*"/>
+            {errors.viatura && (
+                <p className="text-red-600 text-sm font-bold italic">{errors.viatura.message}</p>
             )}            
           </div>
           <div className="w-full">
@@ -137,16 +141,18 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
           </div>
           <div className="w-full">
             <Label htmlFor="kmSaida">KM Saída</Label>
-            <input {...register("kmSaida")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" />
-            {errors.missaoNumero && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
+            <input {...register("kmSaida")} className="w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+  pattern="[0-9]*"/>
+            {errors.kmSaida && (
+                <p className="text-red-600 text-sm font-bold italic">{errors.kmSaida.message}</p>
             )}            
           </div>
           <div className="w-full">
             <Label htmlFor="kmChegada">KM Chegada</Label>
-            <input {...register("kmChegada")} className="w-full border p-2 rounded mt-1 text-sm" />
-            {errors.missaoNumero && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
+            <input {...register("kmChegada")} className="w-full border p-2 rounded mt-1 text-sm" inputMode="numeric" 
+  pattern="[0-9]*"/>
+            {errors.kmChegada && (
+                <p className="text-red-600 text-sm font-bold italic">{errors.kmChegada.message}</p>
             )}            
           </div>
         </div>
@@ -197,6 +203,8 @@ export function FormStart({ onPreview, dadosIniciais }: FormStartProps) {
                   <Label className="text-xs md:text-sm font-bold uppercase">Matrícula</Label>
                   <input 
                     {...register(`equipe.${index}.mat` as const)} 
+                    inputMode="numeric" 
+                    pattern="[0-9]*"
                     placeholder="000.000"
                     className={`w-full border p-2 rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
                       index === 0 && errors.equipe ? "border-red-500" : ""
