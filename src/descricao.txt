@@ -1,24 +1,24 @@
 Prencher á mão formulário em papel? Por que ainda fazemos isso?
 
-Agora você pode preencher o Boletim de Missão Policial, (é, o BMP de todo plantão!) de forma online, e apenas imprimir para assinar.
+Agora você pode preencher o Boletim de Missão Policial. É, o BMP de todo plantão! de forma online, e apenas imprimir para assinar.
 
 Fica muito mais rápido, mais prático, e se alguém precisar ler, não precisa decifrar seus garranchos.
 
 É só acessar o link do forumulário, e começar a preencher.
 
-Você vai notar que várias informações já estão preenchidas, aquelas que se repetem quase sempre. Se precisar alterar, é só editar.
+Você vai notar que várias informações já estão preenchidas. Aquelas que se repetem quase sempre. Se precisar alterar, é só editar.
 
-Outros campos oferecem o recurso de auto completar. Você pode começar a digitar o número de ordem da viatura, e selecioná-la na lista, garantindo que já seja automaticamente preenchida a placa oficial do veículo, e a placa reservada também, se houver.
+Outros campos oferecem o recurso de auto completar. Você pode começar a digitar o número de ordem da viatura, e selecionar na lista, garantindo que já seja automaticamente preenchida a placa oficial do veículo, e a placa reservada também, se houver.
 
-A mesma coisa para os integrantes da equipe policial. Comece a digitar o nome do policial, e ao localizá-lo na lista, a matrícula ou ID já será automaticamente preenchida. Muito mais fácil, certo?
+A mesma coisa para os integrantes da equipe policial. Comece a digitar o nome do policial. Ao localizá-lo na lista, a matrícula ou ID já será automaticamente preenchida. Muito mais fácil. Certo?
 
 Depois é só escrever as diligências realizadas no Resumo das Missões, e clicar em "Visualizar e Gerar BMP".
 
-Nesta etapa, se você esqueceu de preencher algum campo obrogatório, receberá um aviso.
+Nesta etapa, se você esqueceu de preencher algum campo obrigatório, receberá um aviso.
 
 Depois de conferir, é só clicar em "Imprimir BMP" e pronto.
 
-Ah, você pode fazer o preenchimento pelo seu celular também. Só que para imprimir, como a rede da impressora da delegacia tem diversos bloqueios, você poderá usar a opção de gerar um PDF com todos os dados e enviar por WhatsApp ou e-mail, assim qum estiver no computador da delegacia poder imprimir.
+Ah, você pode fazer o preenchimento pelo seu celular também. Só que para imprimir, como a rede da impressora da delegacia tem diversos bloqueios, você poderá usar a opção de gerar um PDF com todos os dados e enviar por WhatsApp ou e-mail, assim quem estiver no computador da delegacia poderá imprimir pra você.
 
 Agora BMP no papel é mais rápido e mais fácil.
 
