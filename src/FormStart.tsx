@@ -1,5 +1,332 @@
+// import { useForm, useFieldArray, type FieldErrors } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { formSchema, type FormData } from "./assets/formSchema";
+// import { Label } from "./components/Label";
+// import { LISTA_POLICIAIS } from "./assets/policiais";
+// import { LISTA_VIATURAS } from "./assets/viaturas";
+
+// interface FormStartProps {
+//   onPreview: (data: FormData) => void;
+//   dadosIniciais: FormData | null;
+//   onAbrirFeedback: () => void;
+// }
+
+
+// export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormStartProps) {
+  
+//   const dataAtual = () => {
+//     const hoje = new Date();
+//     const dia = String(hoje.getDate()).padStart(2, '0');
+//     const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+//     const ano = hoje.getFullYear();
+//     return `${dia}/${mes}/${ano}`;
+//   };
+
+//   const { 
+//     register, 
+//     handleSubmit, 
+//     control,
+//     setValue,
+//     formState: { errors } 
+//   } = useForm<FormData>({
+//     resolver: zodResolver(formSchema),
+//     defaultValues: dadosIniciais || {
+//       orgaoSubordinante: "SEPOL / SSPIO",
+//       upj: "CORE",
+//       regiaoAtuacao: "V",
+//       autoridade: "Dr. Fabrício de Oliveira Pereira",
+//       objetivo: "X",
+//       data: dataAtual(),
+//       referencia: "",
+//       missaoNumero: "",
+//       viatura: "",
+//       placaOficial: "",
+//       placaReservada: "",
+//       prefixoCod: "",
+//       kmSaida: "",
+//       kmChegada: "",
+//       resumo: "",
+//       equipe: [
+//         { nome: "", mat: "" },
+//         { nome: "", mat: "" },
+//         { nome: "", mat: "" },
+//         { nome: "", mat: "" },
+//       ]
+//     }
+//   });
+
+//   const { fields } = useFieldArray({
+//     control,
+//     name: "equipe",
+//   });
+
+//   const aoEnviar = (data: FormData) => {
+//     onPreview(data);
+//   };
+
+//   const aoDarErro = (err: FieldErrors<FormData>) => {
+//     console.error("Campos pendentes de preenchimento:", err);
+//     alert("Verifique campo de preenchimento obrigatório...");
+//   };
+
+//   return (
+//     <div className="max-w-4xl mx-auto p-1 sm:p-4 bg-gray-100 shadow-md font-sans">
+//       <div className="flex justify-center mb-4">
+//         <img 
+//           src="/logo-core-preto-cinza.gif" 
+//           alt="Logotipo CORE" 
+//           className="h-16 md:h-20 w-auto object-contain" 
+//         />
+//       </div>
+//       <h1 className="md:text-xl font-bold text-gray-800 mb-6 border-b-2 border-blue-800 pb-2 text-center tracking-wider">
+//         Boletim de Missão Policial - BMP
+//       </h1>
+
+//       <form onSubmit={handleSubmit(aoEnviar, aoDarErro)} className="space-y-6">
+        
+//         {/* SEÇÃO 1: CABEÇALHO E AUTORIDADE */}
+//         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+//           <div className="w-full">
+//             <Label htmlFor="orgaoSubordinante">Órgão Subordinante</Label>
+//             <input {...register("orgaoSubordinante")} className="w-full border p-2 rounded mt-1 font-bold text-[0.65rem] md:text-sm bg-blue-50/20" />
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="upj">UPJ</Label>
+//             <input {...register("upj")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="autoridade">Nome, Cargo e Mat. da Autoridade</Label>
+//             <input {...register("autoridade")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
+//           </div>
+//         </div>
+
+//         {/* SEÇÃO 2: DADOS DA MISSÃO */}
+//         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+//           <div className="w-full">
+//             <Label htmlFor="missaoNumero">Nº Missão</Label>
+//             <input {...register("missaoNumero")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
+//             {errors.missaoNumero && (
+//               <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
+//             )}
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="data">Data</Label>
+//             <input {...register("data")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
+//             {errors.data && (
+//                 <p className="text-red-600 text-sm font-bold italic">{errors.data.message}</p>
+//             )}
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="referencia">Ref. (BDT)</Label>
+//             <input {...register("referencia")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
+//             {errors.referencia && (
+//                 <p className="text-red-600 text-sm font-bold italic">{errors.referencia.message}</p>
+//             )}            
+//           </div>
+//         </div>
+
+//         {/* SEÇÃO 3: VIATURA E KM */}
+//         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+//           <div className="w-full">
+//             <Label htmlFor="viatura">Viatura (Nº Ordem)</Label>
+//             <input 
+//               {...register("viatura")} 
+//               list="lista-viaturas" // Conecta ao datalist abaixo
+//               className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm"
+//               inputMode="numeric"
+//               onChange={(e) => {
+//                 const valor = e.target.value;
+//                 // Atualiza o valor do campo "viatura" manualmente para garantir a sincronia
+//                 setValue("viatura", valor); 
+
+//                 // Busca a viatura correspondente na lista
+//                 const vtr = LISTA_VIATURAS.find(v => v.prefixo === valor);
+//                 if (vtr) {
+//                   // Preenche apenas as placas conforme o novo padrão
+//                   setValue("placaOficial", vtr.placaOficial);
+//                   setValue("placaReservada", vtr.placaReservada);
+//                 }
+//               }}
+//             />
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="placaOficial">Placa Oficial</Label>
+//             <input {...register("placaOficial")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="placaReservada" className="text-sm uppercase">Placa Reservada</Label>
+//             <input {...register("placaReservada")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="prefixoCod">Prefixo Cód.</Label>
+//             <input {...register("prefixoCod")} className="w-full border p-2 font-bold rounded mt-1 text-sm text-blue-900" />
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="kmSaida">KM Saída</Label>
+//             <input {...register("kmSaida")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
+//   pattern="[0-9]*"/>
+//             {errors.kmSaida && (
+//                 <p className="text-red-600 text-sm font-bold italic">{errors.kmSaida.message}</p>
+//             )}            
+//           </div>
+//           <div className="w-full">
+//             <Label htmlFor="kmChegada">KM Chegada</Label>
+//             <input {...register("kmChegada")} className="w-full border p-2 font-bold rounded mt-1 text-sm" inputMode="numeric" 
+//   pattern="[0-9]*"/>
+//             {errors.kmChegada && (
+//                 <p className="text-red-600 text-sm font-bold italic">{errors.kmChegada.message}</p>
+//             )}            
+//           </div>
+//         </div>
+
+//         {/* SEÇÃO 4: REGIÃO E OBJETIVO */}
+//         <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+          
+//           <div>
+//             <Label htmlFor="regiaoAtuacao">Região de Atuação Inicial</Label>
+//             <input {...register("regiaoAtuacao")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
+//           </div>
+//           <div>
+//             <Label htmlFor="objetivo">Objetivo Inicial</Label>
+//             <input {...register("objetivo")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
+//           </div>
+//         </div>
+
+//         {/* SEÇÃO 5: EQUIPE POLICIAL */}
+//         <div className="bg-white sm:p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+//           {fields.map((field, index) => { 
+//             return (
+//               <div 
+//                 key={field.id} 
+//                 // Mudamos de 'flex' para 'flex flex-col' (celular) e 'md:flex-row' (computador)
+//                 className="flex flex-col md:flex-row gap-2 items-start p-2 rounded relative border-b border-3 md:border-none border-gray-200 m-1"
+//               >
+//                 <div className="w-full md:flex-1">
+//                   <Label className="text-xs md:text-sm uppercase">
+//                     {index === 0 ? "Chefe de Equipe" : `Integrante ${index + 1}`}
+//                   </Label>
+
+//                   <input 
+//                     {...register(`equipe.${index}.nome` as const)} 
+//                     list="lista-nomes" // Conecta com o datalist
+//                     placeholder="Nome Completo"
+//                     className={`w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
+//                       index === 0 && errors.equipe ? "border-red-500 focus:ring-red-400" : "focus:ring-blue-400"
+//                     }`} 
+//                     onChange={(e) => {
+//                       const valorDigitado = e.target.value;
+                      
+//                       // 1. Atualiza o valor no formulário enquanto digita
+//                       setValue(`equipe.${index}.nome`, valorDigitado);
+
+//                       // 2. Busca na sua lista ignorando maiúsculas/minúsculas para garantir o acerto
+//                       const policial = LISTA_POLICIAIS.find(
+//                         p => p.nome.toUpperCase() === valorDigitado.toUpperCase()
+//                       );
+                      
+//                       if (policial) {
+//                         // 3. Se houver coincidência, preenche a matrícula do seu arquivo
+//                         setValue(`equipe.${index}.mat`, policial.mat);
+//                       }
+//                     }}
+//                   />
+                  
+//                   {index === 0 && errors.equipe?.message && (
+//                     <p className="text-red-600 text-[10px] md:text-sm font-bold mt-1">
+//                       {errors.equipe.message}
+//                     </p>
+//                   )}
+//                 </div>
+                
+//                 <div className="w-full md:w-32">
+//                   <Label className="text-xs md:text-sm uppercase">Matrícula / ID</Label>
+//                   <input 
+//                     {...register(`equipe.${index}.mat` as const)} 
+//                     inputMode="numeric"
+//                     placeholder="000.000"
+//                     className={`w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
+//                       index === 0 && errors.equipe ? "border-red-500" : ""
+//                     }`} 
+//                   />
+//                 </div>
+//               </div>
+//             );
+//           })}
+//         </div>
+
+//         {/* SEÇÃO 6: RELATO */}
+//         <div className="bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+//           <Label htmlFor="resumo">Resumo das Missões Desempenhadas</Label>
+//           <textarea 
+//             {...register("resumo")} 
+//             className="w-full border p-3 rounded mt-1 h-40 text-[0.65rem] md:text-sm font-mono font-bold focus:ring-2 focus:ring-blue-800 outline-none shadow-inner" 
+//             placeholder="Enumere as missões do dia..."
+//           />
+//           {errors.resumo && (
+//             <p className="text-red-600 text-sm font-bold italic">{errors.resumo.message}</p>
+//           )} 
+//         </div>
+
+//         <button 
+//           type="submit" 
+//           className="w-full bg-blue-800 text-white font-bold py-4 rounded-lg hover:bg-blue-900 transition-all shadow-xl active:scale-[0.98] uppercase tracking-widest text-[0.65rem] md:text-sm"
+//         >
+//           Visualizar BMP / Tela de Impressão
+//         </button>
+
+//         <div className="mt-8 border-t pt-4">
+//           <button 
+//             type="button"
+//             onClick={onAbrirFeedback} // Esta função vem das props
+//             className="w-full bg-gray-100 text-gray-500 border font-bold py-4 rounded-lg hover:bg-blue-900 transition-all shadow-xl active:scale-[0.98] uppercase tracking-widest text-[0.65rem] md:text-sm"
+//           >
+//             💡 Sugerir uma melhoria ou relatar erro
+//           </button>
+//         </div>
+
+//       </form>
+//       <datalist id="lista-nomes">
+//         {LISTA_POLICIAIS.map((p) => (
+//           <option key={p.mat} value={p.nome} />
+//         ))}
+//       </datalist>
+//       <datalist id="lista-viaturas">
+//         {LISTA_VIATURAS.map((v) => (
+//           <option key={v.prefixo} value={v.prefixo}>
+//             {v.placaOficial}
+//           </option>
+//         ))}
+//       </datalist>
+//       <footer className="p-4 mt-6 bg-gray-200 rounded-lg text-gray-400 text-center">
+//         Desenvolvido por{" "}
+//         <a 
+//           href="https://dustein.com" 
+//           target="_blank" 
+//           rel="noopener noreferrer"
+//           className="hover:text-gray-300 transition-colors"
+//         >
+//           DuStein
+//         </a>.
+//       </footer>
+//     </div>
+//   );
+// }
+
 import { useForm, useFieldArray, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  type LucideIcon,
+  Shield, 
+  FileText, 
+  Car, 
+  Users, 
+  // Plus, 
+  Trash2, 
+  AlertTriangle, 
+  CheckCircle2,
+  Info
+} from "lucide-react";
+
 import { formSchema, type FormData } from "./assets/formSchema";
 import { Label } from "./components/Label";
 import { LISTA_POLICIAIS } from "./assets/policiais";
@@ -11,6 +338,20 @@ interface FormStartProps {
   onAbrirFeedback: () => void;
 }
 
+// --- Subcomponentes de UI Estilizados ---
+
+function SectionHeader({ icon: Icon, title }: { icon: LucideIcon, title: string }) {
+  return (
+    <div className="flex items-center gap-2 mb-4 pb-2 border-b-2 border-slate-200">
+      <div className="p-1.5 bg-slate-100 rounded-md text-slate-700">
+        <Icon className="w-5 h-5" />
+      </div>
+      <h3 className="text-sm md:text-lg font-bold text-slate-800 uppercase tracking-tight">{title}</h3>
+    </div>
+  );
+}
+
+// --- Componente Principal ---
 
 export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormStartProps) {
   
@@ -55,236 +396,237 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
     }
   });
 
-  const { fields } = useFieldArray({
+  // const { fields, append, remove } = useFieldArray({
+  //   control,
+  //   name: "equipe",
+  // });
+
+  const { fields, remove } = useFieldArray({
     control,
     name: "equipe",
   });
-
   const aoEnviar = (data: FormData) => {
     onPreview(data);
   };
 
   const aoDarErro = (err: FieldErrors<FormData>) => {
-    console.error("Campos pendentes de preenchimento:", err);
-    alert("Verifique campo de preenchimento obrigatório...");
+    console.error("Campos pendentes:", err);
   };
 
+  // Estilo padrão para inputs
+  const inputClass = (hasError?: boolean | object) => `
+    flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm font-medium
+    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-900 
+    ${hasError ? "border-red-500 bg-red-50 focus:ring-red-500" : "border-slate-300 focus:border-transparent"}
+  `;
+
   return (
-    <div className="max-w-4xl mx-auto p-1 sm:p-4 bg-gray-100 shadow-md font-sans">
-      <div className="flex justify-center mb-4">
-        <img 
-          src="/logo-core-preto-cinza.gif" 
-          alt="Logotipo CORE" 
-          className="h-16 md:h-20 w-auto object-contain" 
-        />
-      </div>
-      <h1 className="md:text-xl font-bold text-gray-800 mb-6 border-b-2 border-blue-800 pb-2 text-center tracking-wider">
-        Boletim de Missão Policial - BMP
-      </h1>
-
-      <form onSubmit={handleSubmit(aoEnviar, aoDarErro)} className="space-y-6">
+    <div className="min-h-screen bg-slate-100 py-4 md:py-8 px-2 sm:px-6 font-sans">
+      <div className="max-w-5xl mx-auto shadow-2xl rounded-xl overflow-hidden">
         
-        {/* SEÇÃO 1: CABEÇALHO E AUTORIDADE */}
-        <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
-          <div className="w-full">
-            <Label htmlFor="orgaoSubordinante">Órgão Subordinante</Label>
-            <input {...register("orgaoSubordinante")} className="w-full border p-2 rounded mt-1 font-bold text-[0.65rem] md:text-sm bg-blue-50/20" />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="upj">UPJ</Label>
-            <input {...register("upj")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="autoridade">Nome, Cargo e Mat. da Autoridade</Label>
-            <input {...register("autoridade")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm bg-blue-50/20" />
+        {/* HEADER */}
+        <div className="bg-slate-800 p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b-4 border-blue-600">
+          <div className="flex items-center gap-4">
+            <div className="p-2 rounded-lg shadow-inner">
+              <img src="/logo-core-preto-cinza.gif" alt="CORE" className="h-12 md:h-16 w-auto object-contain" />
+            </div>
+            <div>
+              <h1 className="text-sm md:text-2xl font-black text-white uppercase tracking-tighter">Boletim de Missão Policial</h1>
+              <p className="text-blue-300 text-[10px] md:text-xs font-bold tracking-widest uppercase">CORE</p>
+            </div>
           </div>
         </div>
 
-        {/* SEÇÃO 2: DADOS DA MISSÃO */}
-        <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
-          <div className="w-full">
-            <Label htmlFor="missaoNumero">Nº Missão</Label>
-            <input {...register("missaoNumero")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
-            {errors.missaoNumero && (
-              <p className="text-red-600 text-sm font-bold italic">{errors.missaoNumero.message}</p>
-            )}
-          </div>
-          <div className="w-full">
-            <Label htmlFor="data">Data</Label>
-            <input {...register("data")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
-            {errors.data && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.data.message}</p>
-            )}
-          </div>
-          <div className="w-full">
-            <Label htmlFor="referencia">Ref. (BDT)</Label>
-            <input {...register("referencia")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" />
-            {errors.referencia && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.referencia.message}</p>
-            )}            
-          </div>
-        </div>
-
-        {/* SEÇÃO 3: VIATURA E KM */}
-        <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
-          <div className="w-full">
-            <Label htmlFor="viatura">Viatura (Nº Ordem)</Label>
-            <input 
-              {...register("viatura")} 
-              list="lista-viaturas" // Conecta ao datalist abaixo
-              className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm"
-              inputMode="numeric"
-              onChange={(e) => {
-                const valor = e.target.value;
-                // Atualiza o valor do campo "viatura" manualmente para garantir a sincronia
-                setValue("viatura", valor); 
-
-                // Busca a viatura correspondente na lista
-                const vtr = LISTA_VIATURAS.find(v => v.prefixo === valor);
-                if (vtr) {
-                  // Preenche apenas as placas conforme o novo padrão
-                  setValue("placaOficial", vtr.placaOficial);
-                  setValue("placaReservada", vtr.placaReservada);
-                }
-              }}
-            />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="placaOficial">Placa Oficial</Label>
-            <input {...register("placaOficial")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="placaReservada" className="text-sm uppercase">Placa Reservada</Label>
-            <input {...register("placaReservada")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="prefixoCod">Prefixo Cód.</Label>
-            <input {...register("prefixoCod")} className="w-full border p-2 font-bold rounded mt-1 text-sm text-blue-900" />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="kmSaida">KM Saída</Label>
-            <input {...register("kmSaida")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" inputMode="numeric" 
-  pattern="[0-9]*"/>
-            {errors.kmSaida && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.kmSaida.message}</p>
-            )}            
-          </div>
-          <div className="w-full">
-            <Label htmlFor="kmChegada">KM Chegada</Label>
-            <input {...register("kmChegada")} className="w-full border p-2 font-bold rounded mt-1 text-sm" inputMode="numeric" 
-  pattern="[0-9]*"/>
-            {errors.kmChegada && (
-                <p className="text-red-600 text-sm font-bold italic">{errors.kmChegada.message}</p>
-            )}            
-          </div>
-        </div>
-
-        {/* SEÇÃO 4: REGIÃO E OBJETIVO */}
-        <div className="flex justify-between flex-wrap gap-2 m-0 my-2 bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
+        <form onSubmit={handleSubmit(aoEnviar, aoDarErro)} className="bg-white p-4 md:p-8 space-y-8">
           
-          <div>
-            <Label htmlFor="regiaoAtuacao">Região de Atuação Inicial</Label>
-            <input {...register("regiaoAtuacao")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
-          </div>
-          <div>
-            <Label htmlFor="objetivo">Objetivo Inicial</Label>
-            <input {...register("objetivo")} className="w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm" />
-          </div>
-        </div>
+          {/* SEÇÃO 1: DADOS INSTITUCIONAIS */}
+          <section>
+            <SectionHeader icon={Shield} title="Dados Institucionais" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <Label>Órgão Subordinante</Label>
+                <input {...register("orgaoSubordinante")} className={inputClass() + " bg-slate-50 text-slate-800"} />
+              </div>
+              <div>
+                <Label>UPJ</Label>
+                <input {...register("upj")} className={inputClass() + " bg-slate-50 text-slate-800 cursor-not-allowed"} />
+              </div>
+              <div>
+                <Label>Autoridade Responsável</Label>
+                <input {...register("autoridade")} className={inputClass()} />
+              </div>
+            </div>
+          </section>
 
-        {/* SEÇÃO 5: EQUIPE POLICIAL */}
-        <div className="bg-white sm:p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
-          {fields.map((field, index) => { 
-            return (
-              <div 
-                key={field.id} 
-                // Mudamos de 'flex' para 'flex flex-col' (celular) e 'md:flex-row' (computador)
-                className="flex flex-col md:flex-row gap-2 items-start p-2 rounded relative border-b border-3 md:border-none border-gray-200 m-1"
+          {/* SEÇÃO 2: DETALHES DA MISSÃO */}
+          <section>
+            <SectionHeader icon={FileText} title="Detalhes da Missão" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <Label>Nº Missão</Label>
+                <input {...register("missaoNumero")} placeholder="Ex: 022/2025" className={inputClass(errors.missaoNumero)} inputMode="numeric" />
+              </div>
+              <div>
+                <Label>Data</Label>
+                <input {...register("data")} className={inputClass(errors.data)} inputMode="numeric" />
+              </div>
+              <div>
+                <Label>Ref. (BDT)</Label>
+                <input {...register("referencia")} className={inputClass(errors.referencia)} inputMode="numeric" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <Label>Região de Atuação Inicial</Label>
+                <input {...register("regiaoAtuacao")} className={inputClass()} />
+              </div>
+              <div>
+                <Label>Objetivo Inicial</Label>
+                <input {...register("objetivo")} className={inputClass()} />
+              </div>
+            </div>
+          </section>
+
+          {/* SEÇÃO 3: VIATURA E LOGÍSTICA */}
+          <section className="bg-slate-50 p-4 md:p-6 rounded-xl border border-slate-200 shadow-inner">
+            <SectionHeader icon={Car} title="Viatura & Logística" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="col-span-2 md:col-span-1">
+                <Label>Viatura (Prefixo)</Label>
+                <input 
+                  {...register("viatura")} 
+                  list="lista-viaturas"
+                  className={inputClass()}
+                  onChange={(e) => {
+                    const valor = e.target.value;
+                    setValue("viatura", valor);
+                    const vtr = LISTA_VIATURAS.find(v => v.prefixo === valor);
+                    if (vtr) {
+                      setValue("placaOficial", vtr.placaOficial);
+                      setValue("placaReservada", vtr.placaReservada);
+                    }
+                  }}
+                />
+              </div>
+              <div>
+                <Label>Placa Oficial</Label>
+                <input {...register("placaOficial")} className={inputClass() + " bg-slate-100 text-slate-600"} readOnly />
+              </div>
+              <div>
+                <Label>Placa Reservada</Label>
+                <input {...register("placaReservada")} className={inputClass() + " bg-slate-100 text-slate-600"} readOnly />
+              </div>
+              <div className="col-span-1">
+                <Label>KM Saída</Label>
+                <input {...register("kmSaida")} className={inputClass(errors.kmSaida)} inputMode="numeric" />
+              </div>
+              <div className="col-span-1">
+                <Label>KM Chegada</Label>
+                <input {...register("kmChegada")} className={inputClass(errors.kmChegada)} inputMode="numeric" />
+              </div>
+              <div>
+                <Label>Prefixo Cód.</Label>
+                <input {...register("prefixoCod")} className={inputClass() + " font-bold text-slate-600"} />
+              </div>
+            </div>
+          </section>
+
+          {/* SEÇÃO 4: EQUIPE POLICIAL */}
+          <section>
+            <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-slate-200">
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 bg-slate-100 rounded-md text-slate-700">
+                  <Users className="w-5 h-5" />
+                </div>
+                <h3 className="text-sm md:text-lg font-bold text-slate-800 uppercase tracking-tight">Equipe Policial</h3>
+              </div>
+              {/* <button
+                type="button"
+                onClick={() => append({ nome: "", mat: "" })}
+                className="text-[10px] font-bold text-blue-700 hover:bg-blue-50 px-3 py-1.5 rounded-full border border-blue-200 transition-all flex items-center gap-1"
               >
-                <div className="w-full md:flex-1">
-                  <Label className="text-xs md:text-sm uppercase">
-                    {index === 0 ? "Chefe de Equipe" : `Integrante ${index + 1}`}
-                  </Label>
+                <Plus className="w-3 h-3" /> ADICIONAR AGENTE
+              </button> */}
+            </div>
 
-                  <input 
-                    {...register(`equipe.${index}.nome` as const)} 
-                    list="lista-nomes" // Conecta com o datalist
-                    placeholder="Nome Completo"
-                    className={`w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
-                      index === 0 && errors.equipe ? "border-red-500 focus:ring-red-400" : "focus:ring-blue-400"
-                    }`} 
-                    onChange={(e) => {
-                      const valorDigitado = e.target.value;
-                      
-                      // 1. Atualiza o valor no formulário enquanto digita
-                      setValue(`equipe.${index}.nome`, valorDigitado);
-
-                      // 2. Busca na sua lista ignorando maiúsculas/minúsculas para garantir o acerto
-                      const policial = LISTA_POLICIAIS.find(
-                        p => p.nome.toUpperCase() === valorDigitado.toUpperCase()
-                      );
-                      
-                      if (policial) {
-                        // 3. Se houver coincidência, preenche a matrícula do seu arquivo
-                        setValue(`equipe.${index}.mat`, policial.mat);
-                      }
-                    }}
-                  />
-                  
-                  {index === 0 && errors.equipe?.message && (
-                    <p className="text-red-600 text-[10px] md:text-sm font-bold mt-1">
-                      {errors.equipe.message}
-                    </p>
+            <div className="space-y-3">
+              {fields.map((field, index) => (
+                <div key={field.id} className="flex flex-col md:flex-row gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200 relative group">
+                  <div className="flex-1">
+                    <Label className="text-[10px] text-slate-500">{index === 0 ? "CHEFE DE EQUIPE" : `AGENTE ${index + 1}`}</Label>
+                    <input 
+                      {...register(`equipe.${index}.nome` as const)} 
+                      list="lista-nomes"
+                      placeholder="Nome do Policial"
+                      className={inputClass()}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setValue(`equipe.${index}.nome`, val);
+                        const policial = LISTA_POLICIAIS.find(p => p.nome.toUpperCase() === val.toUpperCase());
+                        if (policial) setValue(`equipe.${index}.mat`, policial.mat);
+                      }}
+                    />
+                  </div>
+                  <div className="w-full md:w-40">
+                    <Label className="text-[10px] text-slate-500">MATRÍCULA</Label>
+                    <input {...register(`equipe.${index}.mat` as const)} className={inputClass() + " font-mono text-slate-600"} placeholder="000.000" />
+                  </div>
+                  {index > 3 && (
+                    <button type="button" onClick={() => remove(index)} className="md:mt-6 p-2 text-slate-400 hover:text-red-600 transition-colors">
+                      <Trash2 className="w-5 h-5" />
+                    </button>
                   )}
                 </div>
-                
-                <div className="w-full md:w-32">
-                  <Label className="text-xs md:text-sm uppercase">Matrícula / ID</Label>
-                  <input 
-                    {...register(`equipe.${index}.mat` as const)} 
-                    inputMode="numeric"
-                    placeholder="000.000"
-                    className={`w-full border p-2 font-bold rounded mt-1 text-[0.65rem] md:text-sm focus:ring-1 ${
-                      index === 0 && errors.equipe ? "border-red-500" : ""
-                    }`} 
-                  />
-                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* SEÇÃO 5: RESUMO DAS OPERAÇÕES */}
+          <section>
+            <SectionHeader icon={FileText} title="Resumo das Missões" />
+            <div className="relative">
+              <textarea 
+                {...register("resumo")} 
+                className="w-full border-2 border-slate-200 p-4 rounded-xl h-44 text-sm font-medium leading-relaxed focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all resize-none shadow-inner"
+                placeholder="Descreva as missões e atividades realizadas..."
+              />
+              <div className="absolute bottom-3 right-3 text-slate-300 pointer-events-none">
+                <FileText className="w-8 h-8 opacity-20" />
               </div>
-            );
-          })}
-        </div>
+            </div>
+            {errors.resumo && <p className="text-red-600 text-xs font-bold mt-2 flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> {errors.resumo.message}</p>}
+          </section>
 
-        {/* SEÇÃO 6: RELATO */}
-        <div className="bg-white p-4 rounded border shadow-sm border-l-2 border-l-blue-800">
-          <Label htmlFor="resumo">Resumo das Missões Desempenhadas</Label>
-          <textarea 
-            {...register("resumo")} 
-            className="w-full border p-3 rounded mt-1 h-40 text-[0.65rem] md:text-sm font-mono font-bold focus:ring-2 focus:ring-blue-800 outline-none shadow-inner" 
-            placeholder="Enumere as missões do dia..."
-          />
-          {errors.resumo && (
-            <p className="text-red-600 text-sm font-bold italic">{errors.resumo.message}</p>
-          )} 
-        </div>
+          {/* AÇÕES FINAIS */}
+          <div className="pt-8 border-t border-slate-100 space-y-4">
+            <button 
+              type="submit" 
+              className="w-full bg-slate-900 text-white font-black py-4 rounded-xl hover:bg-slate-800 transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-3 tracking-widest text-sm uppercase"
+            >
+              <CheckCircle2 className="w-5 h-5" />
+              Visualizar e Gerar BMP
+            </button>
 
-        <button 
-          type="submit" 
-          className="w-full bg-blue-800 text-white font-bold py-4 rounded-lg hover:bg-blue-900 transition-all shadow-xl active:scale-[0.98] uppercase tracking-widest text-[0.65rem] md:text-sm"
-        >
-          Visualizar BMP / Tela de Impressão
-        </button>
+            <button 
+              type="button"
+              onClick={onAbrirFeedback}
+              className="w-full flex items-center justify-center gap-2 py-3 text-slate-400 text-[10px] font-bold uppercase tracking-widest hover:text-blue-600 transition-colors bg-slate-50 rounded-lg border border-dashed border-slate-300"
+            >
+              <Info className="w-3 h-3" /> Sugerir melhoria ou relatar erro no sistema
+            </button>
+          </div>
+        </form>
 
-        <div className="mt-8 border-t pt-4">
-          <button 
-            type="button"
-            onClick={onAbrirFeedback} // Esta função vem das props
-            className="w-full bg-gray-100 text-gray-500 border font-bold py-4 rounded-lg hover:bg-blue-900 transition-all shadow-xl active:scale-[0.98] uppercase tracking-widest text-[0.65rem] md:text-sm"
-          >
-            💡 Sugerir uma melhoria ou relatar erro
-          </button>
-        </div>
+        {/* FOOTER */}
+        <footer className="bg-slate-50 p-4 text-center border-t border-slate-200">
+          <p className="text-[10px] text-slate-300 font-bold tracking-widest">
+            Desenvolvido por{" "}
+            <a href="https://dustein.com" target="_blank" rel="noopener" className="text-blue-200 hover:underline">DuStein</a>
+          </p>
+        </footer>
+      </div>
 
-      </form>
+      {/* DATALISTS */}
       <datalist id="lista-nomes">
         {LISTA_POLICIAIS.map((p) => (
           <option key={p.mat} value={p.nome} />
@@ -292,22 +634,9 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
       </datalist>
       <datalist id="lista-viaturas">
         {LISTA_VIATURAS.map((v) => (
-          <option key={v.prefixo} value={v.prefixo}>
-            {v.placaOficial}
-          </option>
+          <option key={v.prefixo} value={v.prefixo}>{v.placaOficial}</option>
         ))}
       </datalist>
-      <footer className="p-4 mt-6 bg-gray-200 rounded-lg text-gray-400 text-center">
-        Desenvolvido por{" "}
-        <a 
-          href="https://dustein.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="hover:text-gray-300 transition-colors"
-        >
-          DuStein
-        </a>.
-      </footer>
     </div>
   );
 }
