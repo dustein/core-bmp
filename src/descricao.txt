@@ -2,7 +2,7 @@ Prencher à mão formulário em papel? Por que ainda fazemos isso?
 
 Agora você pode preencher o Boletim de Missão Policial. É, o BMP de todo plantão! de forma totalmente online, e apenas imprimir para assinar.
 
-Fica muito mais rápido, mais prático, e se alguém precisar ler, não precisa decifrar seus garranchos.
+Fica muito mais rápido, mais prático, e vai te economizar tempo.
 
 É só acessar forumulário, e começar a preencher.
 
@@ -12,7 +12,7 @@ Se precisar alterar, é só editar.
 
 Alguns campos oferecem o recurso de auto completar. Você pode começar a digitar o número de ordem da viatura, e selecionar na lista, garantindo que já seja automaticamente preenchida a placa oficial do veículo. E a placa reservada, se houver.
 
-A mesma coisa para os integrantes da equipe policial. Comece a digitar o nome do policial. Ao localizá-lo na lista, a matrícula ou ID já será automaticamente preenchida. Muito mais fácil. Certo?
+A mesma coisa para os integrantes da equipe policial. Comece a digitar o nome do policial. Ao localizá-lo na lista, a matrícula ou ID já será automaticamente preenchida. Muito mais fácil, não é mesmo?
 
 Depois é só escrever as diligências realizadas no Resumo das Missões, e clicar em "Visualizar e Gerar BMP".
 
