@@ -517,6 +517,10 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
                 <Label>Placa Reservada</Label>
                 <input {...register("placaReservada")} className={inputClass() + " bg-slate-100 text-slate-600 uppercase"} />
               </div>
+              <div>
+                <Label>Prefixo Cód.</Label>
+                <input {...register("prefixoCod")} className={inputClass() + " font-bold text-slate-600 uppercase"} />
+              </div>
               <div className="col-span-1">
                 <Label>KM Saída</Label>
                 <input {...register("kmSaida")} className={inputClass(errors.kmSaida)} inputMode="numeric" />
@@ -524,10 +528,6 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
               <div className="col-span-1">
                 <Label>KM Chegada</Label>
                 <input {...register("kmChegada")} className={inputClass(errors.kmChegada)} inputMode="numeric" />
-              </div>
-              <div>
-                <Label>Prefixo Cód.</Label>
-                <input {...register("prefixoCod")} className={inputClass() + " font-bold text-slate-600 uppercase"} />
               </div>
             </div>
           </section>
