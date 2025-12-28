@@ -335,7 +335,7 @@ import { LISTA_VIATURAS } from "./assets/viaturas";
 interface FormStartProps {
   onPreview: (data: FormData) => void;
   dadosIniciais: FormData | null;
-  onAbrirFeedback: () => void;
+  onAbrirFeedback: (data: FormData) => void;
 }
 
 // --- Subcomponentes de UI Estilizados ---
@@ -368,6 +368,7 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
     handleSubmit, 
     control,
     setValue,
+    getValues,
     formState: { errors } 
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -449,7 +450,7 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
               </div>
               <div>
                 <Label>UPJ</Label>
-                <input {...register("upj")} className={inputClass() + " bg-slate-50 text-slate-800 cursor-not-allowed"} />
+                <input {...register("upj")} className={inputClass() + " bg-slate-50 text-slate-800"} />
               </div>
               <div>
                 <Label>Autoridade Responsável</Label>
@@ -510,11 +511,11 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
               </div>
               <div>
                 <Label>Placa Oficial</Label>
-                <input {...register("placaOficial")} className={inputClass() + " bg-slate-100 text-slate-600"} readOnly />
+                <input {...register("placaOficial")} className={inputClass() + " bg-slate-100 text-slate-600 uppercase"} />
               </div>
               <div>
                 <Label>Placa Reservada</Label>
-                <input {...register("placaReservada")} className={inputClass() + " bg-slate-100 text-slate-600"} readOnly />
+                <input {...register("placaReservada")} className={inputClass() + " bg-slate-100 text-slate-600 uppercase"} />
               </div>
               <div className="col-span-1">
                 <Label>KM Saída</Label>
@@ -526,7 +527,7 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
               </div>
               <div>
                 <Label>Prefixo Cód.</Label>
-                <input {...register("prefixoCod")} className={inputClass() + " font-bold text-slate-600"} />
+                <input {...register("prefixoCod")} className={inputClass() + " font-bold text-slate-600 uppercase"} />
               </div>
             </div>
           </section>
@@ -609,7 +610,10 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
 
             <button 
               type="button"
-              onClick={onAbrirFeedback}
+              onClick={() => {
+                const valoresAtuais = getValues(); // Extrai os dados do useForm
+                onAbrirFeedback(valoresAtuais);   // Envia os dados para o App.tsx
+              }}
               className="w-full flex items-center justify-center gap-2 py-3 text-slate-400 text-[10px] font-bold uppercase tracking-widest hover:text-blue-600 transition-colors bg-slate-50 rounded-lg border border-dashed border-slate-300"
             >
               <Info className="w-3 h-3" /> Sugerir melhoria ou relatar erro no sistema

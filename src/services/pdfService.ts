@@ -31,6 +31,7 @@ export const gerarPDFOficial = async (dados: FormData) => {
     unit: "mm",
     format: "a4",
     compress: true,
+    putOnlyUsedFonts: true,
   });
 
   // renderizarGuia(doc);

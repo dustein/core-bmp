@@ -305,21 +305,21 @@ export function ToPrinter({ dados, onClose }: { dados: FormData; onClose: () => 
           <button onClick={onClose} className="text-blue-800 font-bold text-xs uppercase bg-white px-3 py-1 rounded shadow-sm">
             ← Voltar
           </button>
-          <h2 className="text-sm font-black text-gray-700 uppercase tracking-tighter italic">Revisão do Boletim</h2>
+          <h2 className="text-sm font-black text-gray-700 tracking-tighter italic">Revisão do BMP preenchido</h2>
         </div>
         
         <div className="grid grid-cols-2 gap-2">
           <button 
             onClick={() => window.print()} 
-            className="bg-blue-600 text-white py-4 rounded-xl font-bold uppercase text-[10px] sm:text-xs shadow-lg active:scale-95 transition-all"
+            className="bg-blue-600 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs shadow-lg active:scale-95 transition-all"
           >
             🖨️ Imprimir BMP
           </button>
           <button 
             onClick={() => setModalAberto(true)} 
-            className="bg-green-600 text-white py-4 rounded-xl font-bold uppercase text-[10px] sm:text-xs shadow-lg active:scale-95 transition-all"
+            className="bg-green-600 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs shadow-lg active:scale-95 transition-all"
           >
-            🔗 Gerar e Compartilhar
+            🔗 Gerar BMP em PDF
           </button>
         </div>
       </div>

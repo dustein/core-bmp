@@ -149,15 +149,20 @@ export default function App() {
   //   setEtapa('formulario');
   // };
 
+  // Função para gerenciar o salvamento e a troca de tela
+  const lidarComFeedback = (dadosAtuais: FormData) => {
+    setDadosMissao(dadosAtuais); // Salva o progresso atual no "corredor" (App)
+    setEtapa('feedback');
+  };
+
   return (
   <main className="...">
-      {/* 2. Lógica para alternar entre as 3 telas */}
+      {/* Lógica para alternar entre as 3 telas */}
       {etapa === 'formulario' && (
-            <FormStart 
-              // 2. É AQUI que você "usa" o valor da função
+            <FormStart               
               onPreview={lidarComPreview} 
               dadosIniciais={dadosMissao} 
-              onAbrirFeedback={() => setEtapa('feedback')} 
+              onAbrirFeedback={lidarComFeedback} 
             />
       )}
 
