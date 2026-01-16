@@ -1,5 +1,5 @@
 // import { ShieldCheck, LogIn, Lock } from 'lucide-react';
-import { LogIn } from 'lucide-react';
+import { LogIn, Lock } from 'lucide-react';
 
 interface Props {
   onEntrar: () => void;
@@ -31,14 +31,14 @@ export function TelaLogin({ onEntrar }: Props) {
 
         {/* Card de Login */}
         <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-3xl backdrop-blur-sm space-y-6">
-          {/* <div className="flex items-center gap-3 text-slate-400 border-b border-slate-800 pb-4">
+          <div className="flex items-center gap-3 text-slate-400 border-b border-slate-800 pb-4">
             <Lock className="w-4 h-4" />
             <span className="text-xs font-bold uppercase tracking-wider">Acesso Restrito</span>
           </div>
 
-          <p className="text-slate-400 text-sm leading-relaxed">
-            Este é um terminal de uso exclusivo para o preenchimento de boletins oficiais. Ao clicar em entrar, você declara estar ciente das normas de segurança.
-          </p> */}
+          <p className="text-slate-400 text-xs leading-relaxed text-justify">
+            Ao acessar o Gerador de BMP, você concorda com o processamento de dados para fins estritamente operacionais, conforme a LGPD.
+          </p>
 
           <button
             onClick={onEntrar}

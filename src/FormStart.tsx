@@ -91,7 +91,29 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
     control,
     name: "equipe",
   });
-  const aoEnviar = (data: FormData) => {
+
+  // const aoEnviar = (data: FormData) => {
+  //   onPreview(data);
+  // };
+
+  const aoEnviar = async (data: FormData) => {
+      // 1. Dispara o salvamento em segundo plano (estatística)
+    fetch("https://api.steinhq.com/v1/storages/69698d00affba40a623b9477/Página1", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([
+        {
+          "missaoNumero": data.missaoNumero,
+          "data": data.data,          
+          "chefeEquipe": data.equipe[0]?.nome, // Pega o primeiro nome da lista
+          "dataGeracao": new Date().toLocaleString("pt-BR"),
+        },
+      ]),
+    }).catch((err) => console.error("Erro na estatística:", err));
+
+    // 2. Segue imediatamente para o preview (não trava a experiência do usuário)
     onPreview(data);
   };
 
