@@ -82,20 +82,13 @@ export function FormStart({ onPreview, dadosIniciais, onAbrirFeedback }: FormSta
     }
   });
 
-  // const { fields, append, remove } = useFieldArray({
-  //   control,
-  //   name: "equipe",
-  // });
 
   const { fields, remove } = useFieldArray({
     control,
     name: "equipe",
   });
 
-  // const aoEnviar = (data: FormData) => {
-  //   onPreview(data);
-  // };
-
+  
   const aoEnviar = async (data: FormData) => {
       // 1. Dispara o salvamento em segundo plano (estatística)
     fetch("https://api.steinhq.com/v1/storages/69698d00affba40a623b9477/Página1", {

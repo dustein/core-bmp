@@ -9,15 +9,18 @@ export const formSchema = z.object({
   placaOficial: z.string().optional(),
   placaReservada: z.string().optional(),
   prefixoCod: z.string().optional(),
+  kmSaida: z.string().optional(),
+  kmChegada: z.string().optional(),
+  resumo: z.string().optional(),
 
   
   missaoNumero: z.string().min(1, "Nº BMP Obrigatório"),
   data: z.string().min(1, "Informe a data"),
   referencia: z.string().min(1, "Informe o BDT"),
   viatura: z.string().min(1, "Informe a viatura"),
-  kmSaida: z.string().min(1, "KM de Saída Obrigatório"),
-  kmChegada: z.string().min(1, "KM de Chegada Obrigatório"),
-  resumo: z.string().min(1, "Preencha as missões desempenhadas"),
+  // kmSaida: z.string().min(1, "KM de Saída Obrigatório"),
+  // kmChegada: z.string().min(1, "KM de Chegada Obrigatório"),
+  // resumo: z.string().min(1, "Preencha as missões desempenhadas"),
   
 
   equipe: z.array(
@@ -26,12 +29,12 @@ export const formSchema = z.object({
       mat: z.string().optional(),
     })
     ).refine((data) => {
-      // Validação: O primeiro integrante (index 0) DEVE ter nome e mat preenchidos
+
       const chefe = data[0];
       return chefe?.nome && chefe.nome.trim() !== "" && chefe?.mat && chefe.mat.trim() !== "";
     }, {
       message: "O Chefe de Equipe (primeira linha) é obrigatório",
-      path: [0, "nome"], // Aponta o erro para o nome do primeiro integrante
+      path: [0, "nome"],
     }),
   });
 
